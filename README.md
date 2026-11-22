@@ -1,6 +1,6 @@
 # CoreBuild Hardware - Sistema de Gestión de Inventario
 
-Proyecto final de la asignatura **Programación II (ISWZ1103)** desarrollado en Java aplicando Programación Orientada a Objetos (encapsulamiento, herencia y polimorfismo).
+Proyecto Resolución de Problemas de la asignatura **Programación II (ISWZ1103)** desarrollado en Java aplicando Programación Orientada a Objetos (encapsulamiento, herencia y polimorfismo).
 
 ## Integrantes (Grupo 5)
 * **Alexis Albiño Torres**
