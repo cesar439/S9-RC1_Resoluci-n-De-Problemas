@@ -19,8 +19,8 @@ El código está organizado en tres paquetes dentro de `src/inventario/`:
 Al iniciar el programa, el método `cargarDatosIniciales()` carga automáticamente 4 productos de ejemplo (`GPU-01`, `CPU-01`, `CLR-01` y `LAP-01`). Esto se dejó así a propósito para que las pruebas de listado, búsqueda, ventas y alertas de stock bajo sean mucho más rápidas sin tener que registrar productos desde cero en cada ejecución.
 
 ## Diagrama de Clases UML
-![Diagrama UML CoreBuild Hardware](uml_corebuild.png)
+<img width="2665" height="2725" alt="uml_corebuild" src="https://github.com/user-attachments/assets/cdb49bb6-3fb1-4d47-b27a-f6ed7eb17595" />
 
 ## Cómo ejecutarlo
 1. Clonar el repositorio o abrir la carpeta en IntelliJ IDEA.
-2. Ejecutar el archivo `src/inventario/interfaz/Main.java`.<img width="2665" height="2725" alt="uml_corebuild" src="https://github.com/user-attachments/assets/cdb49bb6-3fb1-4d47-b27a-f6ed7eb17595" />
+2. Ejecutar el archivo `src/inventario/interfaz/Main.java`.
