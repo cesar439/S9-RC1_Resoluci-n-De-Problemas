@@ -6,14 +6,12 @@ import inventario.modelo.Producto;
 import inventario.negocio.GestorInventario;
 import java.util.Scanner;
 
-/**
- * Interfaz de consola interactiva para operar el sistema de inventario de CoreBuild Hardware.
- */
+// Menu principal y entrada por consola del sistema CoreBuild Hardware
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        // Restricción de espacio físico: bodega con capacidad máxima de 100 unidades
+        // Capacidad maxima de la bodega: 100 unidades
         GestorInventario gestor = new GestorInventario(100);
         cargarDatosIniciales(gestor);
 
@@ -21,6 +19,7 @@ public class Main {
         do {
             mostrarMenu();
             String entrada = sc.nextLine().trim();
+            // Error si la opcion del menu no es un entero
             try {
                 opcion = Integer.parseInt(entrada);
             } catch (NumberFormatException e) {
@@ -28,6 +27,7 @@ public class Main {
                 continue;
             }
 
+            // Opciones del menu
             switch (opcion) {
                 case 1:
                     registrarComponente(gestor);
@@ -57,6 +57,7 @@ public class Main {
         } while (opcion != 0);
     }
 
+    // Imprime las opciones del menu
     private static void mostrarMenu() {
         System.out.println("\n===== COREBUILD HARDWARE - GESTIÓN DE INVENTARIO =====");
         System.out.println("1. Registrar Componente de PC (GPU, CPU, RAM, Cooler)");
@@ -69,6 +70,7 @@ public class Main {
         System.out.print("Seleccione una opción: ");
     }
 
+    // Carga productos de prueba al iniciar
     private static void cargarDatosIniciales(GestorInventario gestor) {
         gestor.registrarProducto(new ComponentePC(
                 "GPU-01", "RTX 4070 Super 12GB", "ASUS", 580.00, 5, "2026-11-10",
@@ -84,6 +86,7 @@ public class Main {
                 "Ryzen 7 7735HS", 16, 512, true));
     }
 
+    // Lee datos y registra un componente de PC
     private static void registrarComponente(GestorInventario gestor) {
         System.out.println("\n--- REGISTRO DE COMPONENTE PC ---");
         System.out.print("Código (ej. RAM-01): ");
@@ -93,6 +96,7 @@ public class Main {
         System.out.print("Marca: ");
         String marca = sc.nextLine();
 
+        // Validacion costo vacio
         System.out.print("Costo unitario ($): ");
         String costoStr = sc.nextLine().trim();
         if (costoStr.isEmpty()) {
@@ -100,6 +104,7 @@ public class Main {
             return;
         }
 
+        // Validacion stock vacio
         System.out.print("Cantidad en stock: ");
         String stockStr = sc.nextLine().trim();
         if (stockStr.isEmpty()) {
@@ -110,6 +115,7 @@ public class Main {
         double costo;
         int stock;
 
+        // Error si costo o stock no son numeros validos
         try {
             costo = Double.parseDouble(costoStr);
             stock = Integer.parseInt(stockStr);
@@ -125,6 +131,7 @@ public class Main {
         System.out.print("Compatibilidad (ej. DDR5 / AM5): ");
         String compatibilidad = sc.nextLine();
 
+        // Error si la garantia no es un numero entero
         System.out.print("Garantía (meses): ");
         int garantia;
         try {
@@ -138,6 +145,7 @@ public class Main {
         System.out.println(gestor.registrarProducto(comp));
     }
 
+    // Lee datos y registra un portatil
     private static void registrarPortatil(GestorInventario gestor) {
         System.out.println("\n--- REGISTRO DE PORTÁTIL ---");
         System.out.print("Código (ej. LAP-02): ");
@@ -147,6 +155,7 @@ public class Main {
         System.out.print("Marca: ");
         String marca = sc.nextLine();
 
+        // Validacion campos vacios
         System.out.print("Costo unitario ($): ");
         String costoStr = sc.nextLine().trim();
         System.out.print("Cantidad en stock: ");
@@ -159,6 +168,7 @@ public class Main {
 
         double costo;
         int stock;
+        // Error si costo o stock no son numeros
         try {
             costo = Double.parseDouble(costoStr);
             stock = Integer.parseInt(stockStr);
@@ -173,6 +183,7 @@ public class Main {
         String cpu = sc.nextLine();
 
         int ram, ssd;
+        // Error si RAM o SSD no son enteros
         try {
             System.out.print("RAM (GB): ");
             ram = Integer.parseInt(sc.nextLine().trim());
@@ -190,6 +201,7 @@ public class Main {
         System.out.println(gestor.registrarProducto(lap));
     }
 
+    // Busca un producto por codigo y muestra su informacion
     private static void buscarProducto(GestorInventario gestor) {
         System.out.print("\nIngrese el código del producto a buscar: ");
         String codigo = sc.nextLine();
@@ -201,10 +213,12 @@ public class Main {
         }
     }
 
+    // Descuenta unidades vendidas del inventario
     private static void descontarStock(GestorInventario gestor) {
         System.out.print("\nIngrese el código del producto vendido: ");
         String codigo = sc.nextLine();
         System.out.print("Cantidad a descontar: ");
+        // Error si la cantidad no es entera
         try {
             int cant = Integer.parseInt(sc.nextLine().trim());
             System.out.println(gestor.registrarSalidaStock(codigo, cant));

@@ -1,9 +1,6 @@
 package inventario.modelo;
 
-/**
- * Superclase que representa un producto genérico en el inventario de CoreBuild Hardware.
- * Aplica encapsulamiento para proteger los datos base del producto.
- */
+// Clase base para productos del inventario
 public class Producto {
     private String codigo;
     private String nombre;
@@ -49,16 +46,12 @@ public class Producto {
         this.stock = stock;
     }
 
-    /**
-     * Calcula el precio de venta sugerido (método base pensado para ser sobreescrito).
-     */
+    // Precio de venta base (15% de margen)
     public double calcularPrecioVenta() {
-        return costoUnitario * 1.15; // 15% margen base
+        return costoUnitario * 1.15;
     }
 
-    /**
-     * Retorna el valor total invertido en stock para este producto.
-     */
+    // Valor del stock actual de este producto
     public double calcularValorInventario() {
         return costoUnitario * stock;
     }

@@ -1,8 +1,6 @@
 package inventario.modelo;
 
-/**
- * Representa equipos portátiles (laptops) listos para la venta.
- */
+// Subclase para equipos portatiles
 public class Portatil extends Producto {
     private String procesador;
     private int ramGB;
@@ -35,9 +33,9 @@ public class Portatil extends Producto {
         return incluyeSO;
     }
 
+    // Precio de venta con 18% de margen (+$35 si incluye SO)
     @Override
     public double calcularPrecioVenta() {
-        // Margen del 18% más $35 adicionales si incluye licencia de Sistema Operativo
         double base = getCostoUnitario() * 1.18;
         return incluyeSO ? base + 35.0 : base;
     }

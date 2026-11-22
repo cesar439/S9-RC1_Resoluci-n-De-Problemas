@@ -3,10 +3,7 @@ package inventario.negocio;
 import inventario.modelo.Producto;
 import java.util.ArrayList;
 
-/**
- * Clase de negocio que administra la colección de productos mediante agregación.
- * Controla reglas de negocio: códigos únicos, límites de stock y cálculos globales.
- */
+// Logica de negocio y validaciones del inventario
 public class GestorInventario {
     private ArrayList<Producto> productos;
     private final int capacidadMaximaUnidades;
@@ -16,6 +13,7 @@ public class GestorInventario {
         this.capacidadMaximaUnidades = capacidadMaximaUnidades;
     }
 
+    // Suma todas las unidades en bodega
     public int calcularTotalUnidades() {
         int total = 0;
         for (Producto p : productos) {
@@ -24,7 +22,9 @@ public class GestorInventario {
         return total;
     }
 
+    // Valida y registra un producto en la lista
     public String registrarProducto(Producto nuevo) {
+        // Validaciones de datos y reglas de negocio
         if (nuevo == null) {
             return "ERROR: El producto no puede ser nulo.";
         }
@@ -51,6 +51,7 @@ public class GestorInventario {
         return "EXITO: Producto [" + nuevo.getCodigo() + "] registrado correctamente.";
     }
 
+    // Busca producto ignorando mayusculas/minusculas y espacios
     public Producto buscarPorCodigo(String codigo) {
         for (Producto p : productos) {
             if (p.getCodigo().equalsIgnoreCase(codigo.trim())) {
@@ -60,8 +61,10 @@ public class GestorInventario {
         return null;
     }
 
+    // Valida y descuenta stock por salida o venta
     public String registrarSalidaStock(String codigo, int cantidadSalida) {
         Producto p = buscarPorCodigo(codigo);
+        // Validaciones de existencia y cantidad
         if (p == null) {
             return "ERROR: No se encontró ningún producto con el código '" + codigo + "'.";
         }
@@ -75,6 +78,7 @@ public class GestorInventario {
         return "EXITO: Salida registrada. Nuevo stock de " + p.getNombre() + ": " + p.getStock() + " unidades.";
     }
 
+    // Lista todos los productos usando polimorfismo
     public String listarInventario() {
         if (productos.isEmpty()) {
             return "El inventario se encuentra vacío.";
@@ -84,7 +88,7 @@ public class GestorInventario {
         sb.append("                    INVENTARIO GENERAL - COREBUILD HARDWARE\n");
         sb.append("====================================================================================\n");
         for (Producto p : productos) {
-            // Polimorfismo: ejecuta el mostrarInformacion() y calcularPrecioVenta() de la subclase real
+            // Llama al metodo segun el tipo real del objeto
             sb.append("-> (").append(p.obtenerTipo()).append(") ")
                     .append(p.mostrarInformacion()).append("\n");
         }
@@ -94,6 +98,7 @@ public class GestorInventario {
         return sb.toString();
     }
 
+    // Lista productos con stock menor o igual al umbral
     public String listarAlertasStockBajo(int umbralMinimo) {
         StringBuilder sb = new StringBuilder();
         int alertas = 0;
@@ -111,6 +116,7 @@ public class GestorInventario {
         return sb.toString();
     }
 
+    // Calcula el valor total invertido en bodega
     public double calcularValorTotalBodega() {
         double total = 0;
         for (Producto p : productos) {

@@ -1,11 +1,9 @@
 package inventario.modelo;
 
-/**
- * Representa componentes individuales para armado de PC (GPU, CPU, RAM, Coolers, etc.).
- */
+// Subclase para componentes de PC (GPU, CPU, RAM, Cooler, etc.)
 public class ComponentePC extends Producto {
-    private String categoria;      // Ej: Tarjeta de Video, Procesador, RAM, Cooler
-    private String compatibilidad; // Ej: AM5, DDR5, PCIe 4.0, LGA1700
+    private String categoria;
+    private String compatibilidad;
     private int garantiaMeses;
 
     public ComponentePC(String codigo, String nombre, String marca, double costoUnitario,
@@ -29,9 +27,9 @@ public class ComponentePC extends Producto {
         return garantiaMeses;
     }
 
+    // Precio de venta con 20% de margen para componentes
     @Override
     public double calcularPrecioVenta() {
-        // Los componentes individuales tienen un 20% de margen comercial
         return getCostoUnitario() * 1.20;
     }
 
